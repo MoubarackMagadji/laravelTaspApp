@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Validation\Rule;
 
 class UserController extends Controller
 {
@@ -80,5 +82,38 @@ class UserController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+
+    public function login(){
+        return view('users.login');
+    }
+
+    public function register(){
+        return view('users.register');
+    }
+
+    public function registerPost(Request $request){
+        // dd($request->all());
+
+        $user = $request->validate([
+            'firstname'=>'required',
+            'lastname'=>'required',
+            'email'=>['required', 'email', Rule::unique('users','email')],
+            'password'=>'required|min:6'
+        ]);
+
+        $user['password'] = bcrypt($user['password']);
+
+        $user = User::create($user);
+
+        auth()->login($user);
+
+        return redirect('/dashboard');
+        // ->with('success','Congrats. You are now a member')
+    }
+
+    public function dashboard(){
+        return view('users.dashboard');
     }
 }
