@@ -11,7 +11,7 @@
                 <a href='#' class="nav-link active" aria-current="page" href="#">Dashboard</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="#">Users</a>
+                <a href='{{ route('users') }}'  class="nav-link" href="#">Users</a>
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="#">Tasks</a>

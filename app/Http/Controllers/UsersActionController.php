@@ -4,9 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use Illuminate\Http\Request;
-use Illuminate\Validation\Rule;
 
-class UserController extends Controller
+class UsersActionController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -84,50 +83,13 @@ class UserController extends Controller
         //
     }
 
-
-    public function login(){
-        return view('users.login');
+    public function dashboard(){
+        return view('users.dashboard');
     }
 
-    public function register(){
-        return view('users.register');
-    }
+    public function users(){
 
-    public function registerPost(Request $request){
-        // dd($request->all());
-
-        $user = $request->validate([
-            'firstname'=>'required',
-            'lastname'=>'required',
-            'email'=>['required', 'email', Rule::unique('users','email')],
-            'password'=>'required|min:6'
-        ]);
-
-        $user['password'] = bcrypt($user['password']);
-
-        $user = User::create($user);
-
-        auth()->login($user);
-
-        return redirect('/dashboard');
-        // ->with('success','Congrats. You are now a member')
-    }
-
-    public function loginPost(Request $request){
-        // dd($request->all());
-        $user = $request->validate([
-            'email' => ['required','email'],
-            'password' => ['required', 'min:6'],
-        ]);
         
-        if(auth()->attempt($user)){
-            $request->session()->regenerate();
-            return redirect( route('dashboard'));
-        }else{
-            return redirect()->back()->onlyInput('email')->with('error','Invalid credentials');
-        }
-
+        return view('users.users', ['usersList' => User::all()]);
     }
-
-    
 }

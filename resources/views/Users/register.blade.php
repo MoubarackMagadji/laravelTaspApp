@@ -42,7 +42,7 @@
         </div>
         <div class="mb-3">
             <label for="" class="form-label">Password</label>
-            <input type="password" name='password' class="form-control" id="" value="{{ old('')}}">
+            <input type="password" name='password' class="form-control" id="">
             @error('password')
 
                 <span class='text-danger'>{{ $message }} </span>

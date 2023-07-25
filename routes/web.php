@@ -1,7 +1,8 @@
 <?php
 
-use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\UserController;
+use App\Http\Controllers\UsersActionController;
 
 /*
 |--------------------------------------------------------------------------
@@ -24,5 +25,8 @@ Route::post('/register', [UserController::class, 'registerPost'])->name('registe
 Route::get('/login', [UserController::class, 'login'])->name('login');
 Route::post('/login', [UserController::class, 'loginPost'])->name('loginPost');
 
+Route::middleware('auth')->prefix('user')->group(function(){
+    Route::get('/dashboard', [UsersActionController::class, 'dashboard'])->name('dashboard');
+    Route::get('/users', [UsersActionController::class, 'users'])->name('users');
+});
 
-Route::get('/dashboard', [UserController::class, 'dashboard'])->name('dashboard');
