@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Tasks;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
@@ -117,6 +118,8 @@ class UsersActionController extends Controller
     }
 
     public function tasks(){
-        return view('tasks.tasks');
+        $tasks = Tasks::all();
+
+        return view('tasks.tasks', compact('tasks'));
     }
 }

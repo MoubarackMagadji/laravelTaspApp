@@ -1,7 +1,7 @@
 @extends('layouts.mainLayout')
 
 @section('title')
-    {{ 'Dashboard' }}
+    {{ 'Tasks' }}
 @endsection
 
 
@@ -25,10 +25,36 @@
                 <h1 class='mb-3'>Tasks list</h1>
 
                 <a href='{{route('createTask')}}' class='align-self-center'>
-                    <button  class='btn btn-dark btn-sm px-3 ' style="height: 30px"> Create a tasks</button>
+                    <button  class='btn btn-dark btn-sm px-3 ' style="height: 30px"> Create a task</button>
                 </a>
 
             </div>
+
+
+            <table class='table table-striped' style="width: 100%">
+                <thead>
+                    <tr >
+                        <th>Task id </th>
+                        <th>Title</th>
+                        <th>User fullname</th>
+                        <th>Created at</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach ($tasks as $task)
+                        
+                        <tr>
+                            <td>{{ $task->id }} </td>
+                            <td>{{ $task->title }} </td>
+                            <td>{{ $task->user->fullname() }}</td>
+                            <td>{{ $task->created_at->format('d/m/Y') }}</td>
+                            
+                        </tr>
+                            
+
+                    @endforeach
+                </tbody>
+            </table>
         </div>
     </div>
 @endsection

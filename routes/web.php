@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\TasksController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\UsersActionController;
@@ -34,7 +35,8 @@ Route::middleware('auth')->prefix('user')->group(function(){
 
     Route::prefix('tasks')->group(function(){
         Route::get('/', [UsersActionController::class, 'tasks'])->name('tasks');
-        Route::get('/create', [UsersActionController::class, 'createTaskForm'])->name('createTask');
+        Route::get('/create', [TasksController::class, 'create'])->name('createTask');
+        Route::post('/create', [TasksController::class, 'store'])->name('createTaskPost');
     });
     
 });

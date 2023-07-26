@@ -35,6 +35,14 @@ class User extends Authenticatable
         return strtoupper($value);
     }
 
+    public function tasks(){
+        return $this->hasMany(Tasks::class, 'user_id');
+    }
+
+    public function fullname(){
+        return $this->firstname.' '.$this->lastname;
+    }
+
     /**
      * The attributes that should be hidden for serialization.
      *
