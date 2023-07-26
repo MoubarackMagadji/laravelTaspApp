@@ -32,8 +32,14 @@ Route::middleware('auth')->prefix('user')->group(function(){
     Route::get('/users/create', [UsersActionController::class, 'createUserForm'])->name('create');
     Route::post('/users/create', [UsersActionController::class, 'createUserFormPost']);
 
-    Route::get('/tasks', [UsersActionController::class, 'tasks'])->name('tasks');
+    Route::prefix('tasks')->group(function(){
+        Route::get('/', [UsersActionController::class, 'tasks'])->name('tasks');
+        Route::get('/create', [UsersActionController::class, 'createTaskForm'])->name('createTask');
+    });
+    
 });
+
+
 
 Route::get('/logout', [UserController::class, 'logout'])->name('logout');
 

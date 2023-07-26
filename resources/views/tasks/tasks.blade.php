@@ -21,7 +21,14 @@
         </ul>
     
         <div class='border-dark bg-light'>
-            
+            <div class="d-flex justify-content-between ">
+                <h1 class='mb-3'>Tasks list</h1>
+
+                <a href='{{route('createTask')}}' class='align-self-center'>
+                    <button  class='btn btn-dark btn-sm px-3 ' style="height: 30px"> Create a tasks</button>
+                </a>
+
+            </div>
         </div>
     </div>
 @endsection
