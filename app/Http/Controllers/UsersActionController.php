@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Validation\Rule;
 
 class UsersActionController extends Controller
 {
@@ -89,7 +90,29 @@ class UsersActionController extends Controller
 
     public function users(){
 
-        
         return view('users.users', ['usersList' => User::all()]);
+    }
+
+    public function createForm(){
+
+        return view('users.create');
+    }
+
+    public function createFormPost(Request $request){
+
+        // dd($request->all());
+
+        $user = $request->validate([
+            'firstname'=>'required',
+            'lastname'=>'required',
+            'email'=>['required', 'email', Rule::unique('users','email')],
+            'password'=>'required|min:6'
+        ]);
+
+        $user['password'] = bcrypt($user['password']);
+
+        User::create($user);
+
+        return redirect()->back()->with('success', 'User successfully created');
     }
 }

@@ -28,5 +28,9 @@ Route::post('/login', [UserController::class, 'loginPost'])->name('loginPost');
 Route::middleware('auth')->prefix('user')->group(function(){
     Route::get('/dashboard', [UsersActionController::class, 'dashboard'])->name('dashboard');
     Route::get('/users', [UsersActionController::class, 'users'])->name('users');
+    Route::get('/users/create', [UsersActionController::class, 'createForm'])->name('create');
+    Route::post('/users/create', [UsersActionController::class, 'createFormPost']);
+
+    Route::get('/tasks', [UsersActionController::class, 'tasks'])->name('tasks');
 });
 
