@@ -10,13 +10,13 @@
     <div class='container'>
         <ul class="nav nav-tabs mt-5">
             <li class="nav-item">
-                <a href='{{ route('dashboard') }}' class="nav-link " aria-current="page" href="#">Dashboard</a>
+                <a href='{{ route('dashboard') }}' class="nav-link " >Dashboard</a>
             </li>
             <li class="nav-item">
-                <a href='{{ route('users') }}'  class="nav-link active" aria-current="page"  href="#">Users</a>
+                <a href='{{ route('users') }}'  class="nav-link active" aria-current="page" >Users</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href=" {{ route('tasks') }}">Tasks</a>
+                <a class="nav-link" href='{{ route('tasks') }}'>Tasks</a>
             </li> 
         </ul>
     

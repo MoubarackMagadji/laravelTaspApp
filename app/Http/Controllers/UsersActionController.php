@@ -93,12 +93,12 @@ class UsersActionController extends Controller
         return view('users.users', ['usersList' => User::all()]);
     }
 
-    public function createForm(){
+    public function createUserForm(){
 
         return view('users.create');
     }
 
-    public function createFormPost(Request $request){
+    public function createUserFormPost(Request $request){
 
         // dd($request->all());
 
@@ -114,5 +114,9 @@ class UsersActionController extends Controller
         User::create($user);
 
         return redirect()->back()->with('success', 'User successfully created');
+    }
+
+    public function tasks(){
+        return view('tasks.tasks');
     }
 }

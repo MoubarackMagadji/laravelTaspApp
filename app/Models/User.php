@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Attribute;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -25,6 +26,14 @@ class User extends Authenticatable
         'lastname',
         'address'
     ];
+
+    public function getFirstnameAttribute($value){
+        return ucfirst($value);
+    }
+
+    public function getLastnameAttribute($value){
+        return strtoupper($value);
+    }
 
     /**
      * The attributes that should be hidden for serialization.
