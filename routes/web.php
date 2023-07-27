@@ -33,6 +33,8 @@ Route::middleware('auth')->prefix('user')->group(function(){
     Route::get('/users/create', [UsersActionController::class, 'createUserForm'])->name('create');
     Route::post('/users/create', [UsersActionController::class, 'createUserFormPost']);
 
+    Route::post('/avatar', [UserController::class, 'avatar'])->name('avatar');
+
     Route::prefix('tasks')->group(function(){
         Route::get('/', [UsersActionController::class, 'tasks'])->name('tasks');
         Route::get('/create', [TasksController::class, 'create'])->name('createTask');
@@ -41,7 +43,6 @@ Route::middleware('auth')->prefix('user')->group(function(){
         Route::get('/task/{task:slug}', [TasksController::class, 'show'])->name('task');
         Route::get('/task/{task}/edit', [TasksController::class, 'edit'])->name('taskEdit');
         Route::post('/task/edit', [TasksController::class, 'update'])->name('taskEditPost');
-
     });
     
 });

@@ -6,6 +6,7 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
 
+
 class UserController extends Controller
 {
     /**
@@ -135,6 +136,14 @@ class UserController extends Controller
         session()->invalidate();
         session()->regenerateToken();
         return redirect('/');
+    }
+
+    public function avatar( Request $request){
+        // dd($request->hasFile('avatar'));
+
+        
+
+        return 'okok';
     }
 
     

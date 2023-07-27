@@ -84,8 +84,6 @@ class TasksController extends Controller
     public function update(Request $request)
     {
 
-        // dd();
-
         $taskToUpdate = Tasks::findOrFail($request->task_id);
         
         $task = $request->validate([
