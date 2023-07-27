@@ -4,7 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Validation\Rule;
+use Intervention\Image\Facades\Image;
 
 
 class UserController extends Controller
@@ -141,9 +143,25 @@ class UserController extends Controller
     public function avatar( Request $request){
         // dd($request->hasFile('avatar'));
 
-        
+        $file = $request->validate([
+           'avatar'=>'required|image|max:3000' 
+        ]);
 
-        return 'okok';
+        $user = auth()->user();
+
+        Storage::delete('public/avatars/'.$user->avatar);
+
+        $image = Image::make($request->file('avatar'))->fit(150)->encode('jpg');
+        
+        $fileName = auth()->user()->id.'-'.uniqid().'.jpg';
+
+        Storage::put('public/avatars/'.$fileName , $image);
+
+        
+        $user->avatar = $fileName;
+        $user->save();
+        
+        return redirect()->back();
     }
 
     
