@@ -86,7 +86,16 @@ class UsersActionController extends Controller
     }
 
     public function dashboard(){
-        return view('users.dashboard');
+
+        // dd(auth()->user());
+
+        if(auth()->user()->id == 1){
+            $tasks = Tasks::simplePaginate(5);
+        }else{
+            $tasks = auth()->user()->tasks()->simplePaginate(5);
+        }
+
+        return view('users.dashboard',['tasks'=>$tasks]);
     }
 
     public function users(){
@@ -118,7 +127,12 @@ class UsersActionController extends Controller
     }
 
     public function tasks(){
-        $tasks = Tasks::all();
+
+        if(auth()->user()->id == 1){
+            $tasks = Tasks::simplePaginate(5);
+        }else{
+            $tasks = auth()->user()->tasks()->simplePaginate(5);
+        }
 
         return view('tasks.tasks', compact('tasks'));
     }

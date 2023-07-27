@@ -54,6 +54,10 @@
                     @endforeach
                 </tbody>
             </table>
+
+            <div class="text-center mt-5">
+                {{ $tasks->links()}}
+            </div>
         </div>
     </div>
 @endsection

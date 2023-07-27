@@ -32,7 +32,7 @@
                             
                             <li class="nav-item dropdown">
                                 <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                {{ Auth::user()->firstname.' '.Auth::user()->lastname }}
+                                <img style="width: 20px" src="{{ Auth::user()->avatar ? asset('/storage/avatars/'.Auth::user()->avatar) : 'mainAvatar.jpg' }}" > {{ Auth::user()->fullname() }}
                                 </a>
                                 <ul class="dropdown-menu">
                                     <li><a class="dropdown-item" href="{{ route('dashboard')}}">Dashboard</a></li>
