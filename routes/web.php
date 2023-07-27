@@ -37,6 +37,11 @@ Route::middleware('auth')->prefix('user')->group(function(){
         Route::get('/', [UsersActionController::class, 'tasks'])->name('tasks');
         Route::get('/create', [TasksController::class, 'create'])->name('createTask');
         Route::post('/create', [TasksController::class, 'store'])->name('createTaskPost');
+        
+        Route::get('/task/{task:slug}', [TasksController::class, 'show'])->name('task');
+        Route::get('/task/{task}/edit', [TasksController::class, 'edit'])->name('taskEdit');
+        Route::post('/task/edit', [TasksController::class, 'update'])->name('taskEditPost');
+
     });
     
 });

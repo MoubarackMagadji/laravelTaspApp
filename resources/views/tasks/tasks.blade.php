@@ -36,7 +36,7 @@
                     <tr >
                         <th>Task id </th>
                         <th>Title</th>
-                        <th>User fullname</th>
+                        <th>Author</th>
                         <th>Created at</th>
                     </tr>
                 </thead>
@@ -45,10 +45,9 @@
                         
                         <tr>
                             <td>{{ $task->id }} </td>
-                            <td>{{ $task->title }} </td>
+                            <td><a class='text-dark' href='{{ route('task', ['task'=>$task->slug]) }}'> {{ $task->title }}</a> </td>
                             <td>{{ $task->user->fullname() }}</td>
-                            <td>{{ $task->created_at->format('d/m/Y') }}</td>
-                            
+                            <td>{{ $task->created_at->format('d/m/Y') }}</td> 
                         </tr>
                             
 

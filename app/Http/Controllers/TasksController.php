@@ -44,7 +44,7 @@ class TasksController extends Controller
             'content' => 'required'
         ]);
 
-        $task['slug'] = Str::slug('title');
+        $task['slug'] = Str::slug($task['title']);
         $task['user_id'] = Auth::id();
         
         Tasks::create($task);
@@ -58,9 +58,9 @@ class TasksController extends Controller
      * @param  \App\Models\Tasks  $tasks
      * @return \Illuminate\Http\Response
      */
-    public function show(Tasks $tasks)
+    public function show(Tasks $task)
     {
-        //
+        return view('tasks.task', compact('task'));
     }
 
     /**
@@ -69,9 +69,9 @@ class TasksController extends Controller
      * @param  \App\Models\Tasks  $tasks
      * @return \Illuminate\Http\Response
      */
-    public function edit(Tasks $tasks)
+    public function edit(Tasks $task)
     {
-        //
+        return view('tasks.edit', compact('task'));
     }
 
     /**
@@ -81,9 +81,21 @@ class TasksController extends Controller
      * @param  \App\Models\Tasks  $tasks
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Tasks $tasks)
+    public function update(Request $request)
     {
-        //
+
+        // dd();
+
+        $taskToUpdate = Tasks::findOrFail($request->task_id);
+        
+        $task = $request->validate([
+            'title' => 'required|min:6|max:50',
+            'content' => 'required'
+        ]);
+        
+        $taskToUpdate->update($task);
+
+        return redirect(route('task', ['task'=>$taskToUpdate->slug]))->with('success', 'Task update successfully');
     }
 
     /**
