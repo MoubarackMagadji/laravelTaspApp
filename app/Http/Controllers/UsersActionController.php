@@ -94,6 +94,7 @@ class UsersActionController extends Controller
         }else{
             $tasks = auth()->user()->tasks()->simplePaginate(5);
         }
+        
 
         return view('users.dashboard',['tasks'=>$tasks]);
     }
@@ -133,6 +134,7 @@ class UsersActionController extends Controller
         }else{
             $tasks = auth()->user()->tasks()->simplePaginate(5);
         }
+        
 
         return view('tasks.tasks', compact('tasks'));
     }

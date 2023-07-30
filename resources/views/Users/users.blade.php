@@ -8,17 +8,8 @@
 
 @section('content')
     <div class='container'>
-        <ul class="nav nav-tabs mt-5">
-            <li class="nav-item">
-                <a href='{{ route('dashboard') }}' class="nav-link " >Dashboard</a>
-            </li>
-            <li class="nav-item">
-                <a href='{{ route('users') }}'  class="nav-link active" aria-current="page" >Users</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href='{{ route('tasks') }}'>Tasks</a>
-            </li> 
-        </ul>
+        
+        <x-main-tab page="users" />
     
         <div class='border-dark bg-light'>
             
